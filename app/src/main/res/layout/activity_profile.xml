@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ProfileActivity"
+    android:padding="8dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="?attr/colorPrimary"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+            <!-- NAME CARD VIEW           -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/name_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Emri"
+                    android:textSize="25dp"
+                    android:layout_gravity="center"
+                    android:textColor="?attr/colorOnPrimary"/>
+
+            </androidx.cardview.widget.CardView>
+            <!--   MY CARS TEXT         -->
+            <TextView
+                android:id="@+id/cs_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Makinat e regjistruara"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@+id/name_card_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:textColor="?attr/colorOnPrimary"/>
+            <!--   CARS RECYCLER VIEW         -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/recycler_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@+id/cs_text"
+
+                android:layout_marginTop="8dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/user_cars_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </androidx.cardview.widget.CardView>
+            <!--   MY parkings TEXT         -->
+            <TextView
+                android:id="@+id/parking_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parkinget e Prenotuara"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_card_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="?attr/colorOnPrimary"/>
+            <!--PARKING SPOTS RECYCLER VIEW-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/parking_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@+id/parking_text"
+                android:layout_marginTop="8dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/parking_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </androidx.cardview.widget.CardView>
+            <!--   BOTTOM TOOLBAR         -->
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/coordinator"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+
+                <com.google.android.material.bottomappbar.BottomAppBar
+                    android:id="@+id/bottom_app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:backgroundTint="?attr/colorPrimaryVariant"
+                    app:fabAlignmentMode="end">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shto Parking"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"/>
+
+
+                </com.google.android.material.bottomappbar.BottomAppBar>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_watch_parking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_anchor="@id/bottom_app_bar"
+                    android:src="@drawable/ic_car"
+                    android:backgroundTint="@color/mediumorchid" />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
