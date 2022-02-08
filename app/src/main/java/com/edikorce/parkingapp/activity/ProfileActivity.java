@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +24,13 @@ import com.edikorce.parkingapp.adapter.UserParkingAdapter;
 import com.edikorce.parkingapp.apiclient.ApiClient;
 import com.edikorce.parkingapp.apiclient.ApiInterface;
 import com.edikorce.parkingapp.localdb.Repository;
+import com.edikorce.parkingapp.model.ParkingSpot;
 import com.edikorce.parkingapp.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -107,6 +114,61 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     });
             aleretDialog.show();
+
+        }else if (item.getItemId() == R.id.btn_add_parking){
+
+            EditText inputValue = new EditText(getApplication());
+            inputValue.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+
+            AlertDialog.Builder inputParkingDialog = new AlertDialog.Builder(this)
+                    .setView(inputValue)
+                    .setTitle("ParkingApp")
+                    .setMessage("Shto Parking")
+                    .setPositiveButton("Shto ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String parkingName = inputValue.getText().toString();
+
+                            ParkingSpot parkingSpot = new ParkingSpot();
+                            parkingSpot.setName(parkingName);
+                            parkingSpot.setTaken(false);
+                            if (!parkingName.isEmpty()){
+                                Call<ParkingSpot> addParkingSpot = apiInterface.addParkingSpot(parkingSpot);
+
+                                addParkingSpot.enqueue(new Callback<ParkingSpot>() {
+                                    @Override
+                                    public void onResponse(Call<ParkingSpot> call, Response<ParkingSpot> response) {
+                                        if(response.isSuccessful()){
+                                            ParkingSpot parkingSpot1 = response.body();
+                                            AlertDialog.Builder alb = new AlertDialog.Builder(ProfileActivity.this)
+                                                    .setMessage("Vendi i parkingut me emer\n" + parkingSpot1.getName() + "\n u shtua me sukses")
+                                                    .setNegativeButton("mbyll", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+
+                                                        }
+                                                    });
+                                            alb.show();
+
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ParkingSpot> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+                        }
+                    })
+                    .setNegativeButton("Mbyll", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+            inputParkingDialog.show();
 
         }
         return super.onOptionsItemSelected(item);
